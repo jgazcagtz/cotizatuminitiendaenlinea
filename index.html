@@ -1,0 +1,680 @@
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vende en línea con MiniTienda Express</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f3f3f3;
+            color: #333;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        header {
+            text-align: center;
+            padding: 20px;
+            background-color: #ff3131;
+            color: white;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        header img {
+            width: 300px;
+            margin-bottom: 20px;
+        }
+
+        main {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .cotizador {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+            animation: slideIn 0.5s ease-in-out;
+        }
+
+        .cotizador h2 {
+            color: #ff3131;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+
+        .cotizador label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .cotizador select,
+        .cotizador input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            transition: border-color 0.3s ease;
+        }
+
+        .cotizador select:focus,
+        .cotizador input:focus {
+            border-color: #ff3131;
+            outline: none;
+        }
+
+        .cotizador button {
+            background-color: #e3240b;
+            color: white;
+            border: none;
+            padding: 14px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+            display: block;
+            margin: 20px auto 0;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        .cotizador button:hover {
+            background-color: #ffdd00;
+            color: black;
+        }
+
+        .resultado {
+            margin-top: 20px;
+            font-weight: bold;
+            text-align: center;
+            font-size: 1.2em;
+            color: #ff3131;
+        }
+
+        .ejemplos {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+            animation: slideIn 0.5s ease-in-out;
+        }
+
+        .ejemplos h3 {
+            color: #ff3131;
+            margin-bottom: 20px;
+        }
+
+        .ejemplos ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .ejemplos ul li {
+            margin-bottom: 10px;
+        }
+
+        .ejemplos ul li a {
+            color: #e3240b;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .ejemplos ul li a:hover {
+            color: #ffdd00;
+        }
+
+        .productos {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+            animation: slideIn 0.5s ease-in-out;
+        }
+
+        .productos h3 {
+            color: #e3240b;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 1.8em;
+            position: relative;
+        }
+
+        .productos h3::after {
+            content: "🏪";
+            position: absolute;
+            top: 0;
+            right: 0;
+            font-size: 1.2em;
+        }
+
+        .producto {
+            margin-bottom: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: left;
+            color: #333;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+            font-weight: bold;
+            background-color: white;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            align-items: center;
+            min-height: 200px;
+        }
+
+        .producto:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .producto img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-right: 20px;
+        }
+
+        .producto h4 {
+            margin-bottom: 10px;
+            color: black;
+            font-size: 1.5em;
+        }
+
+        .producto p {
+            margin-bottom: 10px;
+            font-size: 1em;
+            color: #555;
+        }
+
+        .producto button {
+            background-color: #25d366;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            align-self: flex-start;
+        }
+
+        .producto button:hover {
+            background-color: #128c7e;
+        }
+
+        footer {
+          position: sticky;
+            text-align: center;
+            padding: 20px 0;
+            background-color: #ff3131;
+            color: white;
+            margin-top: 40px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .cart {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            animation: fadeIn 0.5s ease-in-out;
+            position: relative;
+        }
+
+        .cart-toggle {
+            background-color: #e3240b;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .cart-item {
+            margin-bottom: 10px;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            position: relative;
+        }
+
+        .cart-item button {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            background-color: #ff3131;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .cart-item button:hover {
+            background-color: #e3240b;
+        }
+
+        .payment-options {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .payment-options button {
+            margin-bottom: 10px;
+            padding: 10px 15px;
+            width: 100%;
+            max-width: 250px;
+            background-color: #0070ba;
+            color: white;
+            border-radius: 8px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .payment-options button.oxxo-btn {
+            background-color: #FF9900;
+        }
+
+        .payment-options button.oxxo-btn:hover {
+            background-color: #cc7a00;
+        }
+
+        .payment-options button.copy-btn {
+            background-color: #555;
+        }
+
+        .payment-options button:hover {
+            background-color: #005ea6;
+        }
+
+        .whatsapp-button {
+            background-color: #25D366;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 50px;
+            font-size: 1.1em;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-decoration: none;
+            margin-top: 20px;
+            animation: bounceIn 1s ease-in-out;
+            width: 100%;
+            max-width: 250px;
+        }
+
+        .whatsapp-button img {
+            width: 24px;
+            height: 24px;
+        }
+
+      .credit-card-button {
+    background-color: #3b7bbf;
+    color: white;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 150px; /* Match width with the PayPal button */
+    margin-top: 150px; /* Adjust margin to align with other buttons */
+    text-align: center;
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    padding: 0px 0px; /* Add padding to make it consistent */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
+}
+
+.credit-card-button form {
+    width: 100%; /* Ensure the form takes full width */
+    display: flex; /* Use flexbox */
+    justify-content: center; /* Center the content */
+    align-items: center; /* Center vertically */
+}
+
+.credit-card-button input[type="image"] {
+    max-width: 100%; /* Ensure the image doesn't overflow */
+    height: auto; /* Maintain aspect ratio */
+    display: block; /* Ensures the image is centered */
+    margin: 0 auto; /* Centers the image within the parent */
+}
+
+
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes bounceIn {
+            from {
+                transform: scale(0.95);
+                opacity: 0.7;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .cotizador select,
+            .cotizador input,
+            .producto button {
+                font-size: 0.9em;
+                padding: 10px 15px;
+            }
+
+            .producto img {
+                width: 100%;
+                height: auto;
+            }
+
+            .whatsapp-button {
+                font-size: 1em;
+                padding: 8px 15px;
+            }
+
+            .payment-options button {
+                padding: 8px 12px;
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="https://i.imgur.com/T5cwFnq.png" alt="MiniTienda Online Logo">
+        <h1>Tu MiniTienda en Línea</h1>
+      <p>¡Vende tus productos, servicios, membresías, consultas y más!
+    </header>
+
+    <main>
+        <div class="cotizador">
+            <h2>💻 Obtén una cotización</h2>
+            <p>Selecciona las opciones que prefieras y obtén una cotización instantánea para tu MiniTienda Express.</p>
+
+            <form id="formCotizador">
+                <label for="opciones">Elige tu paquete:</label>
+                <select id="opciones">
+                    <option value="399">📄 Menú digital - Catálogo digital Básico: WhatsApp - $399 pago único de por vida</option>
+                    <option value="899">📄 Menú digital - Catálogo digital Estándar: WhatsApp + PayPal - $899 pago único de por vida</option>
+                    <option value="1499">📄 Menú digital - Catálogo digital Premium: WhatsApp + PayPal + Chatbot - $1,499 pago único de por vida</option>
+                    <option value="2799">🏪 Tienda en Línea (Básico): $2,799 MXN - Pago único de por vida</option>
+                    <option value="5999">🏪 Tienda en Línea (Premium): $5,999 MXN - Pago único de por vida</option>
+                    <option value="5999">💻 Página Web: $5,999 MXN - Pago único de por vida</option>
+                    <option value="10999">🏪💻 Todo en Uno (Página Web + Tienda en Línea): $10,999 MXN - Pago único de por vida</option>
+                </select>
+
+                <label for="cantidadProductos">¿Cuántos productos deseas vender?</label>
+                <select id="cantidadProductos">
+                    <option value="50">Hasta 50 productos</option>
+                    <option value="100">Hasta 100 productos</option>
+                    <option value="150">Hasta 150 productos</option>
+                    <option value="200">Hasta 200 productos</option>
+                    <option value="250">Hasta 250 productos</option>
+                    <option value="300">Hasta 300 productos</option>
+                    <option value="350">Hasta 350 productos</option>
+                    <option value="400">Hasta 400 productos</option>
+                    <option value="450">Hasta 450 productos</option>
+                    <option value="500">Hasta 500 productos</option>
+                </select>
+
+                <button type="button" onclick="addToCart()">Cotizar y añadir al carrito</button>
+            </form>
+
+            <div class="resultado" id="resultadoCotizacion"></div>
+
+            <div class="cart-toggle" onclick="toggleCart()">🛒 Ver Carrito</div>
+            <div id="cart" class="cart" style="display:none;">
+                <!-- Cart Items will be displayed here -->
+                <div id="cart-items"></div>
+                <h3>Puedes pagar tu MiniTienda con:</h3>
+              <ul>
+                <li>Tarjeta de crédito y débito en Paypal</li>
+                <li>Transferencia o depósito Bancario</li>
+                <li>Depósito en OXXO</li>
+              </ul>
+                <!-- Payment Buttons and WhatsApp -->
+                <div class="payment-options">
+                    <!-- Credit Card PayPal Button -->
+                    <div class="credit-card-button">
+                        <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
+                            <input type="hidden" name="cmd" value="_xclick" />
+                            <input type="hidden" name="business" value="gascagtz@gmail.com" />
+                            <input type="hidden" name="currency_code" value="MXN" />
+                            <input type="hidden" name="amount" value="0" id="paypal-amount" />
+                            <input type="hidden" name="item_name" value="Compra con Tarjeta de Crédito" />
+                            <input type="image" src="https://www.paypalobjects.com/webstatic/en_US/i/btn/png/silver-pill-paypal-44px.png" border="0" name="submit" title="Paga con PayPal" alt="PayPal - La forma más segura y fácil de pagar en línea!" />
+                        </form>
+                    </div>
+                    <button class="oxxo-btn" onclick="showOxxoInfo()">Paga en OXXO® 🏦</button>
+                    <button class="copy-btn" onclick="copyToClipboard()">Copiar Información de Pago 📋</button>
+                    <a href="https://wa.me/525528503766" class="whatsapp-button" target="_blank" id="whatsapp-btn">
+                        <img src="https://img.icons8.com/color/48/000000/whatsapp.png" alt="WhatsApp"> Envíanos un WhatsApp
+                    </a>
+                </div>
+            </div>
+        </div>
+
+       <div class="ejemplos">
+    <h3>📂 Ejemplos de Menú-Catálogo Digital</h3>
+    <ul>
+        <li><a href="https://panzaverde.vercel.app/" target="_blank">🥗 Panza Verde</a></li>
+        <li><a href="https://kazoku-izakaya.vercel.app/" target="_blank">🍣 Kazoku Izakaya</a></li>
+        <li><a href="https://pollo-kentucky-shoppingcart-whats-app.vercel.app/" target="_blank">🍗 El Gallito Bien Happy</a></li>
+        <li><a href="https://paulies-pizza-v3.vercel.app/" target="_blank">🍕 Paulie's Pizza</a></li>
+        <li><a href="https://rosticeriasduran.shop" target="_blank">🍖 Rosticerías Durán</a></li>
+        <li><a href="https://almuerzoschelito.vercel.app/" target="_blank">🍲 Almuerzos Chelito</a></li>
+    </ul>
+</div>
+
+
+        <div class="productos">
+            <h3>🛒 Tu Menú Digital, Tienda en Línea y Página Web</h3>
+
+            <div class="producto">
+                <img src="https://i.imgur.com/4i2ojUx.jpg" alt="Menú digital Básico">
+                <div>
+                    <h4>📄 Menú digital - Catálogo digital Básico - $399 MXN</h4>
+                    <p>🛠️ Integración con WhatsApp para recibir pedidos de tus clientes.</p>
+                    <div id="paypal-form-basico"></div>
+                    <button onclick="updatePayPalForm(399, 'Menú digital - Catálogo digital Básico', 'paypal-form-basico')">Comprar Menú Digital</button>
+                </div>
+            </div>
+
+            <div class="producto">
+                <img src="https://i.imgur.com/9ynae6K.jpg" alt="Menú digital Estándar">
+                <div>
+                    <h4>📄 Menú digital - Catálogo digital Estándar - $899 MXN</h4>
+                    <p>💸 WhatsApp + Integración Pago con tarjetas bancarias y PayPal.</p>
+                    <div id="paypal-form-estandar"></div>
+                    <button onclick="updatePayPalForm(899, 'Menú digital - Catálogo digital Estándar', 'paypal-form-estandar')">Comprar Menú Digital</button>
+                </div>
+            </div>
+
+            <div class="producto">
+                <img src="https://i.imgur.com/771FstZ.jpg" alt="Menú digital Premium">
+                <div>
+                    <h4>📄 Menú digital - Catálogo digital Premium - $1,499 MXN</h4>
+                    <p>🤖 WhatsApp + Pago en línea con tarjetas bancarias, PayPal + Chatbot.</p>
+                    <div id="paypal-form-premium"></div>
+                    <button onclick="updatePayPalForm(1499, 'Menú digital - Catálogo digital Premium', 'paypal-form-premium')">Comprar Menú Digital</button>
+                </div>
+            </div>
+
+            <div class="producto">
+                <img src="https://i.imgur.com/Wd0bSG8.jpg" alt="Tienda en Línea Básico">
+                <div>
+                    <h4>🏪 Tienda en Línea (Básico) - $2,799 MXN</h4>
+                    <p>🔧 Configuración Básica de landing page con mini tienda en línea.</p>
+                    <div id="paypal-form-tienda-basico"></div>
+                    <button onclick="updatePayPalForm(2799, 'Tienda en Línea (Básico)', 'paypal-form-tienda-basico')">Comprar Tienda Online</button>
+                </div>
+            </div>
+
+            <div class="producto">
+                <img src="https://i.imgur.com/9ynae6K.jpg" alt="Tienda en Línea Premium">
+                <div>
+                    <h4>🏪 Tienda en Línea (Premium) - $5,999 MXN</h4>
+                    <p>🎯 Configuración completa de una tienda en línea hasta para 40 productos o servicios físicos/digitales.</p>
+                    <div id="paypal-form-tienda-premium"></div>
+                    <button onclick="updatePayPalForm(5999, 'Tienda en Línea (Premium)', 'paypal-form-tienda-premium')">Comprar Tienda Online</button>
+                </div>
+            </div>
+
+            <div class="producto">
+                <img src="https://i.imgur.com/771FstZ.jpg" alt="Página Web">
+                <div>
+                    <h4>💻 Página Web - $5,999 MXN</h4>
+                    <p>🌐 Diseño y configuración de una página web con funciones básicas.</p>
+                    <div id="paypal-form-web"></div>
+                    <button onclick="updatePayPalForm(5999, 'Página Web', 'paypal-form-web')">Comprar Página Web</button>
+                </div>
+            </div>
+
+            <div class="producto">
+                <img src="https://i.imgur.com/Wd0bSG8.jpg" alt="Todo en Uno">
+                <div>
+                    <h4>🏪💻 Todo en Uno (Página Web + Tienda en Línea) - $10,999 MXN</h4>
+                    <p>🔗 Solución con tienda en línea y página web integrada.</p>
+                    <div id="paypal-form-todo"></div>
+                    <button onclick="updatePayPalForm(10999, 'Todo en Uno (Página Web + Tienda en Línea)', 'paypal-form-todo')">Comprar Todo en Uno</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>Contacto: <a href="https://minitienda.online" target="_blank" style="color: white; text-decoration: underline;">MiniTienda Express</a> | Soporte 24/7 | 💬</p>
+        <p>© 2024 MiniTiendaExpress</p>
+    </footer>
+
+    <script>
+        let cart = [];
+        let total = 0;
+
+        function addToCart() {
+            const paquete = document.getElementById('opciones');
+            const cantidadProductos = document.getElementById('cantidadProductos');
+            const selectedPaquete = paquete.options[paquete.selectedIndex];
+            const selectedCantidad = cantidadProductos.options[cantidadProductos.selectedIndex];
+
+            let incremento = 0;
+            if (parseInt(selectedCantidad.value) > 50) {
+                incremento = Math.floor((parseInt(selectedCantidad.value) - 50) / 50) * 0.1;
+            }
+
+            const itemTotal = parseFloat(selectedPaquete.value) * (1 + incremento);
+            total += itemTotal;
+
+            cart.push({
+                name: selectedPaquete.text,
+                quantity: selectedCantidad.text,
+                price: itemTotal.toFixed(2)
+            });
+
+            document.getElementById('resultadoCotizacion').innerText = `Inversión Total: $${total.toFixed(2)} MXN`;
+
+            updateCartDisplay();
+            updateWhatsAppLink();
+        }
+
+        function toggleCart() {
+            const cartElement = document.getElementById('cart');
+            cartElement.style.display = cartElement.style.display === 'none' ? 'block' : 'none';
+        }
+
+        function updateCartDisplay() {
+            const cartItemsElement = document.getElementById('cart-items');
+            cartItemsElement.innerHTML = cart.map((item, index) => `
+                <div class="cart-item">
+                    <strong>${item.name}</strong><br />
+                    Cantidad: ${item.quantity}<br />
+                    Precio: $${item.price} MXN
+                    <button onclick="removeFromCart(${index})">Eliminar</button>
+                </div>
+            `).join('');
+            updatePayPalAmount();
+        }
+
+        function removeFromCart(index) {
+            total -= parseFloat(cart[index].price);
+            cart.splice(index, 1);
+
+            document.getElementById('resultadoCotizacion').innerText = `Costo Total: $${total.toFixed(2)} MXN`;
+            updateCartDisplay();
+            updateWhatsAppLink();
+        }
+
+        function updatePayPalForm(amount, itemName, elementId) {
+            const paypalForm = document.getElementById(elementId);
+            paypalForm.innerHTML = `
+                <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
+                    <input type="hidden" name="cmd" value="_xclick" />
+                    <input type="hidden" name="business" value="gascagtz@gmail.com" />
+                    <input type="hidden" name="currency_code" value="MXN" />
+                    <input type="hidden" name="amount" value="${amount}" />
+                    <input type="hidden" name="item_name" value="${itemName}" />
+                    <input type="image" src="https://www.paypalobjects.com/webstatic/en_US/i/btn/png/silver-pill-paypal-44px.png" border="0" name="submit" title="Paga con PayPal" alt="PayPal - La forma más segura y fácil de pagar en línea!" />
+                </form>
+            `;
+        }
+
+        function updatePayPalAmount() {
+            const paypalAmount = document.getElementById('paypal-amount');
+            if (paypalAmount) {
+                paypalAmount.value = total.toFixed(2);
+            }
+        }
+
+        function updateWhatsAppLink() {
+            const whatsappBtn = document.getElementById('whatsapp-btn');
+            const message = `Cotización de MiniTienda:\n${cart.map(item => `${item.name} (${item.quantity}) - $${item.price} MXN`).join('\n')}\nTotal: $${total.toFixed(2)} MXN`;
+            const encodedMessage = encodeURIComponent(message);
+            whatsappBtn.href = `https://wa.me/525528503766?text=${encodedMessage}`;
+            whatsappBtn.style.display = total > 0 ? 'inline-flex' : 'none';
+        }
+
+        function showOxxoInfo() {
+            alert("Paga en efectivo/depósito en OXXO\nNúmero de tarjeta Santander: 5579 1003 5748 9127\nTotal a pagar: $" + total.toFixed(2) + " MXN\nPor favor, asegúrate de enviar tu comprobante.");
+        }
+
+        function copyToClipboard() {
+            const text = `Número de tarjeta Santander: 5579 1003 5748 9127\nTotal a pagar: $${total.toFixed(2)} MXN\nDescripción: ${cart.map(item => `${item.name} (${item.quantity}) - $${item.price} MXN`).join(', ')}`;
+            navigator.clipboard.writeText(text).then(() => {
+                alert("Información de pago copiada al portapapeles.");
+            }).catch(err => {
+                alert("Error al copiar la información: " + err);
+            });
+        }
+    </script>
+</body>
+</html>
