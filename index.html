@@ -173,6 +173,7 @@
             display: flex;
             align-items: center;
             min-height: 200px;
+            flex-wrap: wrap;
         }
 
         .producto:hover {
@@ -186,6 +187,7 @@
             object-fit: cover;
             border-radius: 10px;
             margin-right: 20px;
+            flex-shrink: 0;
         }
 
         .producto h4 {
@@ -218,7 +220,7 @@
         }
 
         footer {
-          position: sticky;
+            position: sticky;
             text-align: center;
             padding: 20px 0;
             background-color: #ff3131;
@@ -331,37 +333,35 @@
             height: 24px;
         }
 
-      .credit-card-button {
-    background-color: #3b7bbf;
-    color: white;
-    border-radius: 8px;
-    width: 100%;
-    max-width: 150px; /* Match width with the PayPal button */
-    margin-top: 150px; /* Adjust margin to align with other buttons */
-    text-align: center;
-    transition: all 0.3s ease;
-    display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
-    padding: 0px 0px; /* Add padding to make it consistent */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
-}
+        .credit-card-button {
+            background-color: #3b7bbf;
+            color: white;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 150px;
+            margin-top: 150px;
+            text-align: center;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0px 0px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
 
-.credit-card-button form {
-    width: 100%; /* Ensure the form takes full width */
-    display: flex; /* Use flexbox */
-    justify-content: center; /* Center the content */
-    align-items: center; /* Center vertically */
-}
+        .credit-card-button form {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-.credit-card-button input[type="image"] {
-    max-width: 100%; /* Ensure the image doesn't overflow */
-    height: auto; /* Maintain aspect ratio */
-    display: block; /* Ensures the image is centered */
-    margin: 0 auto; /* Centers the image within the parent */
-}
-
-
+        .credit-card-button input[type="image"] {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
 
         @keyframes fadeIn {
             from { opacity: 0; }
@@ -385,16 +385,68 @@
         }
 
         @media (max-width: 768px) {
+            header img {
+                width: 200px;
+            }
+
+            .cotizador {
+                padding: 20px;
+            }
+
+            .cotizador h2 {
+                font-size: 1.5em;
+            }
+
             .cotizador select,
-            .cotizador input,
-            .producto button {
+            .cotizador input {
                 font-size: 0.9em;
                 padding: 10px 15px;
+            }
+
+            .cotizador button {
+                font-size: 1em;
+                padding: 12px 25px;
+            }
+
+            .ejemplos, .productos {
+                padding: 20px;
+            }
+
+            .productos h3 {
+                font-size: 1.5em;
             }
 
             .producto img {
                 width: 100%;
                 height: auto;
+                margin-bottom: 20px;
+                margin-right: 0;
+            }
+
+            .producto {
+                flex-direction: column;
+                align-items: center;
+                min-height: auto;
+            }
+
+            .producto h4 {
+                font-size: 1.3em;
+            }
+
+            .producto p {
+                font-size: 0.9em;
+                text-align: center;
+            }
+
+            .producto button {
+                font-size: 1em;
+                padding: 10px 20px;
+                margin-top: 15px;
+            }
+
+            .payment-options button {
+                padding: 8px 12px;
+                font-size: 0.9em;
             }
 
             .whatsapp-button {
@@ -402,9 +454,49 @@
                 padding: 8px 15px;
             }
 
-            .payment-options button {
-                padding: 8px 12px;
+            footer {
                 font-size: 0.9em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header img {
+                width: 150px;
+            }
+
+            .cotizador h2 {
+                font-size: 1.3em;
+            }
+
+            .cotizador select,
+            .cotizador input {
+                font-size: 0.8em;
+            }
+
+            .cotizador button {
+                font-size: 0.9em;
+                padding: 10px 20px;
+            }
+
+            .productos h3 {
+                font-size: 1.3em;
+            }
+
+            .producto h4 {
+                font-size: 1.2em;
+            }
+
+            .producto p {
+                font-size: 0.8em;
+            }
+
+            .producto button {
+                font-size: 0.9em;
+                padding: 8px 15px;
+            }
+
+            footer {
+                font-size: 0.8em;
             }
         }
     </style>
@@ -413,7 +505,7 @@
     <header>
         <img src="https://i.imgur.com/T5cwFnq.png" alt="MiniTienda Online Logo">
         <h1>Tu MiniTienda en Línea</h1>
-      <p>¡Vende tus productos, servicios, cursos, membresías y más!
+        <p>¡Vende tus productos, servicios, cursos, membresías y más!</p>
     </header>
 
     <main>
@@ -454,17 +546,14 @@
 
             <div class="cart-toggle" onclick="toggleCart()">🛒 Ver Carrito</div>
             <div id="cart" class="cart" style="display:none;">
-                <!-- Cart Items will be displayed here -->
                 <div id="cart-items"></div>
                 <h3>Puedes pagar tu MiniTienda con:</h3>
-              <ul>
-                <li>Tarjeta de crédito y débito en Paypal</li>
-                <li>Transferencia o depósito Bancario</li>
-                <li>Depósito en OXXO</li>
-              </ul>
-                <!-- Payment Buttons and WhatsApp -->
+                <ul>
+                    <li>Tarjeta de crédito y débito en Paypal</li>
+                    <li>Transferencia o depósito Bancario</li>
+                    <li>Depósito en OXXO</li>
+                </ul>
                 <div class="payment-options">
-                    <!-- Credit Card PayPal Button -->
                     <div class="credit-card-button">
                         <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
                             <input type="hidden" name="cmd" value="_xclick" />
@@ -484,18 +573,17 @@
             </div>
         </div>
 
-       <div class="ejemplos">
-    <h3>📂 Ejemplos de Menú-Catálogo Digital</h3>
-    <ul>
-        <li><a href="https://panzaverde.vercel.app/" target="_blank">🥗 Panza Verde</a></li>
-        <li><a href="https://kazoku-izakaya.vercel.app/" target="_blank">🍣 Kazoku Izakaya</a></li>
-        <li><a href="https://pollo-kentucky-shoppingcart-whats-app.vercel.app/" target="_blank">🍗 El Gallito Bien Happy</a></li>
-        <li><a href="https://paulies-pizza-v3.vercel.app/" target="_blank">🍕 Paulie's Pizza</a></li>
-        <li><a href="https://rosticeriasduran.shop" target="_blank">🍖 Rosticerías Durán</a></li>
-        <li><a href="https://almuerzoschelito.vercel.app/" target="_blank">🍲 Almuerzos Chelito</a></li>
-    </ul>
-</div>
-
+        <div class="ejemplos">
+            <h3>📂 Ejemplos de Menú-Catálogo Digital</h3>
+            <ul>
+                <li><a href="https://panzaverde.vercel.app/" target="_blank">🥗 Panza Verde</a></li>
+                <li><a href="https://kazoku-izakaya.vercel.app/" target="_blank">🍣 Kazoku Izakaya</a></li>
+                <li><a href="https://pollo-kentucky-shoppingcart-whats-app.vercel.app/" target="_blank">🍗 El Gallito Bien Happy</a></li>
+                <li><a href="https://paulies-pizza-v3.vercel.app/" target="_blank">🍕 Paulie's Pizza</a></li>
+                <li><a href="https://rosticeriasduran.shop" target="_blank">🍖 Rosticerías Durán</a></li>
+                <li><a href="https://almuerzoschelito.vercel.app/" target="_blank">🍲 Almuerzos Chelito</a></li>
+            </ul>
+        </div>
 
         <div class="productos">
             <h3>🛒 Tu Menú Digital, Tienda en Línea y Página Web</h3>
